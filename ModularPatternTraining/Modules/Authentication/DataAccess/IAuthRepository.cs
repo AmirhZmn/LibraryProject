@@ -1,0 +1,18 @@
+﻿using ModularPatternTraining.Modules.Authentication.Models;
+using ModularPatternTraining.Modules.UserManagement.Model;
+using ModularPatternTraining.Shared.Models;
+
+namespace ModularPatternTraining.Modules.Authentication.DataAccess
+{
+    public interface IAuthRepository
+    {
+  
+        Task <Result<bool>>  SaveRefreshToken(string userId, string refreshToken);
+        Task<Result<string>> GenerateRefreshToken();
+        Task<Result<RefreshToken>> GetRefreshToken(string token);
+        Task<Result<ApplicationUser>> GetUserWithRefreshToken(string token);
+        Task <Result<bool>> RevokeRefreshToken(string token);
+        Task<Result<bool>> IsBlacklistedAsync(string jti);
+        Task<Result<bool>> AddToBlacklistAsync(string jti, DateTime expiryDate);
+    }
+}
